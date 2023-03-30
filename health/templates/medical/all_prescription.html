@@ -1,0 +1,46 @@
+{% extends 'medical/sidebar.html' %}
+{% block b %}
+{% load static %}
+
+<h2 style="font-family:roman;color:green" align="center" class="card">All Patients With Their Prescriptions </h2>
+							<div class="card">
+									{% for i in messages %}
+					<p style="color:red">{{i}}</p>
+{% endfor %}
+
+<div class="card-body pt-0">
+    <div class="tab-content pt-0">
+        <div id="pat_appointments" class="tab-pane fade show active">
+            <div class="card card-table mb-0">
+                <div class="card-body">
+                    <div class="row">
+                        {% for patient in data %}
+                        <div class="col-md-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><span style="font-weight: bold;">Patient name:</span> &emsp;&emsp; <span style="color:red;font-weight:bold">{{ patient.first_name }} {{ patient.last_name }}</span> </p>
+                                        {% for appointment in patient.appointments %}
+                                            {% for prescription in appointment.prescriptions %}
+                                            <p><span style="font-weight: bold;">Doctor name:</span> &emsp;&emsp;&nbsp; <span><span style="color:red;font-weight:bold">{{ appointment.doctor_username }}</span></span> </p>
+                                            <ul>
+                                                <li><span style="font-weight: bold;">Prescription Name: </span>&emsp;&emsp; {{ prescription.name }}</li>
+                                                <li><span style="font-weight: bold;">Medicine Quantity:</span> &emsp;&emsp;&nbsp; {{ prescription.quantity }}</li>
+                                                <li><span style="font-weight: bold;">Medicine Days:</span> &emsp;&emsp;&emsp;&emsp;&nbsp; {{ prescription.days }}</li>
+                                                <li><span style="font-weight: bold;">Medicine Times: </span>&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; {{ prescription.time }}</li> <hr>
+                                            </ul>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

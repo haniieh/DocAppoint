@@ -1,0 +1,15 @@
+{% extends 'dr/sidebar.html' %}
+{% load widget_tweaks %}
+{% block b %}
+{% load static %}
+<h2 style="font-family:roman;color:green" align="center" class="card">My Patients </h2>
+
+<div class="card">
+	{% for i in messages %}
+<p style="color:red">{{i}}</p>
+{% endfor %}
+
+</div>
+
+							
+{% endblock %}

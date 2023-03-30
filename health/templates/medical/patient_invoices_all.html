@@ -1,0 +1,62 @@
+{% extends 'medical/sidebar.html' %}
+{% block b %}
+{% load static %}
+
+<h2 style="font-family:roman;color:green" align="center" class="card">All Appointment</h2>
+							<div class="card">
+									{% for i in messages %}
+					<p style="color:red">{{i}}</p>
+{% endfor %}
+								<div class="card-body pt-0">
+									<div class="tab-content pt-0">
+										<div id="pat_appointments" class="tab-pane fade show active">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Patient</th>
+																	<th>Appt Date</th>
+																	<th>Appt Time</th>
+																	<th>Doctor Amount</th>
+																	<th>Status</th>
+																</tr>
+															</thead>
+															<tbody>
+															{% for i in data %}
+																<tr>
+																	<td>
+																		<h2 class="table-avatar">
+																			<a href="#" class="avatar avatar-sm mr-2">
+																				{% if i.patient.image%}
+																				<img class="avatar-img rounded-circle" src="{{i.patient.image.url}}" alt="User Image">
+																				{% endif %}
+																			</a>
+																			<a href="#">Dr. {{i.patient.user.first_name}} {{i.patient.user.last_name}}<span>{{i.specialist}}</span></a>
+																		</h2>
+																	</td>
+
+																	<td>{{i.a_date}} </td>
+																	<td>{{i.from_time}} to {{i.to_time}}</td>
+																	<td>${{i.doctor.price}}</td>
+																	{% if i.status == "pending" %}
+																	<td><span class="badge badge-pill bg-danger-light">{{i.status}}</span></td>
+																	{% else %}
+																	{% if i.status == "confirmed" %}
+																	<td><span class="badge badge-pill bg-success-light">{{i.status}}</span></td>
+																	{% endif %}
+																	{% endif %}
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+{% endblock %}
+

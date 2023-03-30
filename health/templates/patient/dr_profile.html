@@ -1,0 +1,212 @@
+{% extends 'patient/sidebar.html' %}
+{% load widget_tweaks %}
+{% block b %}
+{% load static %}
+<h2 style="font-family:roman;color:red" align="center" class="card">Profile</h2>
+
+            <div class="card">
+              {% for i in messages %}
+<p style="color:red">{{i}}</p>
+{% endfor %}
+			<div class="card-body">
+
+				<form action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+
+						<h3 style="color:red; margin-left:40%">Doctor information</h3>
+						{% if  dr.image %}
+						<img class="rounded-circle" width="100" src="{{dr.image.url}}" alt="User Image">
+						{% endif %}
+
+						<div class="card">
+							<div class="row">
+								<div class="col-6">
+									<p>
+										First Name
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.first_name}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Last Name
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.last_name}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Email
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.email}}
+									</p>  
+								</div>
+							 </div>
+
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Address
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.addr}}
+									</p>  
+								</div>
+							 </div>
+
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Experience
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.experience}}
+									</p>  
+								</div>
+							 </div>
+
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Specialist
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.specialist}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Service
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.service}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Clinic
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.clinic}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Clinic Address
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.cl_address}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Days
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.daystiming}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Time
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.timing}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Price
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.price}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Gender
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.gender}}
+									</p>  
+								</div>
+							 </div>
+
+							 <div class="row">
+								<div class="col-6">
+									<p>
+										Biography
+									</p>
+								</div>
+								<div class="col-6">
+									<p >
+										{{data.biography}}
+									</p>  
+								</div>
+							 </div>
+						</div>
+							</a>	
+                               </form>
+								</div>
+							</div>
+
+{% endblock %}

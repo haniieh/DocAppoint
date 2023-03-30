@@ -1,0 +1,63 @@
+{% extends 'patient/sidebar.html' %}
+{% load widget_tweaks %}
+{% block b %}
+{% load static %}
+<h2 style="font-family:roman;color:red" align="center" class="card">Doctor Schedule</h2>
+
+        <div class="card">
+              {% for i in messages %}
+                <p style="color:red">{{i}}</p>
+              {% endfor %}
+			<div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="doctor-widget">
+              <div class="doc-info-left">
+                <div class="doctor-img" >
+                  <h2 class="table-avatar">
+                    <a href="{% url 'display_dr_profile_by_name' dr.user.username %}" class="avatar avatar-sm mr-2">
+                      {% if dr.image %}
+                      <img class="avatar-img rounded-circle" src="{{dr.image.url}}" alt="User Image">
+                      {% endif %}
+                      <p> {{user.first_name}}</p>
+                    </a>
+                  </h2>
+                </div>
+                <div class="doc-info-cont">
+                  <h4 class="doc-name"><a href="doctor-profile.html">Dr. {{dr.user.first_name}}</a></h4>
+                  <h5 class="doc-department"><img src="{% static 'user/img/specialities/specialities-05.png' %}" class="img-fluid" alt="Speciality">{{i.specialist}} {{dr.biography}}</h5>
+                  <div class="clinic-details">
+                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{dr.cl_address}}</p>
+                    <p class="doc-location"><i class="fas fa-user"></i> {{dr.gender}}</p>
+                    <p class="doc-location"><i class="fas fa-phone"></i> {{dr.mobile_no}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Starting Time</th>
+                      <th scope="col">Ending Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if appointments %}
+                    {% for appoint in appointments %}
+                    <tr>
+                      <td> {{appoint.a_date}} </td>
+                      <td> {{ appoint.from_time }}</td>
+                      <td> {{ appoint.to_time }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+			</div>
+      <button onclick="window.history.back()" class="btn btn-info">Back</button>
+		</div>
+
+{% endblock %}

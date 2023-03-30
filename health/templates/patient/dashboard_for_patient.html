@@ -1,0 +1,219 @@
+{% extends 'patient/sidebar.html' %}
+{% block b %}
+{% load static %}
+
+<h2 style="font-family:roman;color:green" align="center" class="card">All Appointment</h2>
+<div class="card">
+	{% for i in messages %}
+					<p style="color:red">{{i}}</p>
+{% endfor %}
+								<div class="card-body pt-0">
+									<nav class="user-tabs mb-4">
+										<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+											<li class="nav-item">
+												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#pat_prescriptions" data-toggle="tab">Prescriptions</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#pat_medical_records" data-toggle="tab"><span class="med-records">Medical Records</span></a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#pat_billing" data-toggle="tab">Billing</a>
+											</li>
+										</ul>
+									</nav>
+
+									<div class="tab-content pt-0">
+										<div id="pat_appointments" class="tab-pane fade show active">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Doctor</th>
+																	<th>Appt Date</th>
+																	<th>Booking Date</th>
+																	<th>Amount</th>
+																	<th>Follow Up</th>
+																	<th>Status</th>
+																	<th></th>
+																</tr>
+															</thead>
+																											<tbody>
+															{% for info in appointment %}
+																<tr>
+																	<td>
+
+
+
+																		<h2 class="table-avatar">
+																			<a href="{% url 'display_dr_profile_by_name' info.doctor.user.username %}" class="avatar avatar-sm mr-2">
+																				{% if info.doctor.image %}
+																				<img class="avatar-img rounded-circle" src="{{info.doctor.image.url}}" alt="User Image">
+																				{% endif %}
+																			</a>
+																			<a href="#">Dr. {{info.doctor.user.first_name}} {{info.doctor.user.last_name}}<span>{{info.specialist}}</span></a>
+																		</h2>
+																	</td>
+																	<td>{{info.a_date}} </td>
+																	<td>{{info.from_time}} to {{info.to_time}}</td>
+																	<td>${{info.doctor.price}}</td>
+																	{% if info.status == "pending" %}
+																	<td><span class="badge badge-pill bg-danger-light">{{info.status}}</span></td>
+																	{% else %}
+																	{% if info.status == "confirmed" %}
+																	<td><span class="badge badge-pill bg-success-light">{{info.status}}</span></td>
+																	{% endif %}
+																	{% endif %}
+																	<td class="text-right">
+																		<div class="table-action">
+																			<a href="{% url 'patient_invoices' info.id 'appoint' %}" class="btn btn-sm bg-info-light">
+																				<i class="far fa-eye"></i> View
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-pane fade" id="pat_prescriptions">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Date </th>
+																	<th>Timing </th>
+																	<th>Name</th>
+																	<th>Created by </th>
+																	<th></th>
+																</tr>
+															</thead>
+																										<tbody>
+															{% for info in appointment %}
+																<tr>
+																	<td>
+																		{{info.a_date}}</td>
+																	<td>
+																	{{info.from_time}} to {{info.to_time}}
+																	</td>
+																	<td>
+																	{{info.prescription_set.all.0.name}}
+																	</td>
+																	<td> Dr. {{info.doctor.user.first_name}} {{info.doctor.user.last_name}}<br>
+																	<span style="font-size:10px">{{info.doctor.specialist}}</span>
+																	</td>
+
+																	<td class="text-right">
+																		<div class="table-action">
+																			<a href="{% url 'patient_invoices' info.id 'presc' %}" class="btn btn-sm bg-info-light">
+																				<i class="far fa-eye"></i> View
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div id="pat_medical_records" class="tab-pane fade">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>ID</th>
+																	<th>Date </th>
+																	<th>Description</th>
+																	<th>File</th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+															{% for info in appointment %}
+																<tr>
+																	<td>{{forloop.counter}}</td>
+																	<td>{{info.medical_record_set.all.0.date}}</td>
+																	<td>{{info.medical_record_set.all.0.disc}}</td>
+																	<td>{{info.medical_record_set.all.0.file}}</td>
+																	<td class="text-right">
+																		<div class="table-action">
+																			<a href="{% url 'patient_invoices' info.id 'med' %}" class="btn btn-sm bg-info-light">
+																				<i class="far fa-eye"></i> View
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+															{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+	
+										<div id="pat_billing" class="tab-pane fade">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>SI No.</th>
+																	<th>Doctor</th>
+																	<th>Amount</th>
+																	<th>Paid On</th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+															{% for info in appointment %}
+																<tr>
+																	<td>
+																		{{forloop.counter}}
+																	</td>
+																	<td>
+																		<h2 class="table-avatar">
+																			<a href="#" class="avatar avatar-sm mr-2">
+																				{% if info.doctor.image %}
+																				<img class="avatar-img rounded-circle" src="{{info.doctor.image.url}}" alt="User Image">
+																				{% endif %}
+																			</a>
+																			<a href="doctor-profile.html">Dr. {{info.doctor.user.first_name}} {{info.doctor.user.last_name}}<span>{{info.specialist}}</span></a>
+																		</h2>
+																	</td>
+																	<td>{{info.doctor.price}}</td>
+																	<td>{{info.a_date}}</td>
+																	<td class="text-right">
+																		<div class="table-action">
+																			<a href="{% url 'patient_invoices' info.id 'bill' %}" class="btn btn-sm bg-info-light">
+																				<i class="far fa-eye"></i> View
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+															{% endfor %}
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+</div>
+{% endblock %}

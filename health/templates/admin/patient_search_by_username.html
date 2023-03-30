@@ -1,0 +1,170 @@
+{% extends 'admin/admin_sidebar.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+                <div class="content container-fluid">
+<!--<h2 style="font-family:roman;color:green" align="center" class="card">Patient Detail</h2> --> 
+{% for i in messages %}
+<p style="color:red">{{i}}</p>
+{% endfor %}
+             <div class="content container-fluid">
+<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								{% for i in messages %}
+									<p style="color:red">{{i}}</p>
+								{% endfor %}
+								<h3 class="page-title">List of Patients</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+
+
+							<!-- Schedule Widget -->
+							<div class="card booking-schedule schedule-widget">
+
+								<!-- Schedule Header -->
+								<div class="schedule-header">
+									<div class="row">
+										<div class="col-md-12">
+											{% for i in messages %}
+											<p style="color:red">{{i}}</p>
+											{% endfor %}
+											<form action="" method="post">
+												{% csrf_token %}
+												<div class="form-group">
+
+													<h4 class="page-title">Enter Patient by Username</h4>
+													<input type="text" class="form-control" name="username" style="width: 300px; height:30px">
+												</div>
+
+                                                <button type="submit"  class="btn btn-primary submit-btn" >Search</button>
+							</form>
+										</div>
+
+
+										</div>
+									</div>
+								</div>
+                            </div>
+
+						</div>
+
+{% if data %}
+<h2 style="font-family:roman;color:green" align="center" class="card">Patient Detail</h2>
+
+
+<div class="appointments">
+
+    <!-- Appointment List -->
+	<div class="card">
+    <div class="appointment-list">
+        <div class="profile-info-widget">
+            <div class="row" >
+             <div class="col-4 mb-5"  >
+            <a href="#" class="booking-doc-img" >
+				{% if patient.image %}
+				<div style="margin-left: 100px; margin-top:100px">
+					<img class="rounded-circle" width="100" src="{{patient.image.url}}" alt="User Image">
+
+				</div>
+				{% endif %}
+            </a>
+             </div>
+             <div class="col-8">
+
+                <h3><a href="#">{{data.first_name}} {{data.last_name}}</a></h3>
+                <div class="patient-details">
+					<p><label>email: &emsp;&emsp;&emsp;&emsp;&emsp;</label>{{data.email}}</p>
+					{% if patient%}
+                    <p><label>Address: &emsp;&emsp;&emsp;&emsp;</label>{{patient.addr}}</p>
+                    <p><label>Phone Number: &nbsp;&nbsp;&nbsp;&nbsp;</label>{{patient.mobile_no}}</p>
+					<p><label>Blood Type: &emsp;&emsp;&nbsp;&nbsp;</label>{{patient.blood_group}}</p>
+					<p><label>Date of Birth &emsp;&emsp;&nbsp;</label>{{patient.date_of_birth}}</p>
+					{% endif %}
+            </div>
+
+
+    </div>
+            </div></div></div></div>
+
+
+	<h2 style="font-family:roman;color:green" align="center" class="card">Patient Health Card Detail</h2>
+
+			<div class="card">
+				<div class="appointment-list">
+					<div class="profile-info-widget">
+						<div class="row">
+						 <div class="col-4"></div>
+						 <div class="col-8">
+							<div class="patient-details">
+								<p><label>Health Card ID: &emsp;&emsp;&emsp;&emsp;</label>{{patient.health_uid}}</p>
+								<p><label>Expiration Year: &emsp;&emsp;&emsp;&emsp;</label>{{patient.ex_year}}</p>
+								<p><label>Expiration Month: &emsp;&emsp;&emsp;</label>{{patient.ex_month}}</p>
+								<p><label>CVV: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</label>{{patient.cvv}}</p>
+								<p><label>Card Status: &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;</label>{{patient.card_status}}</p>
+						</div>
+			
+			
+				</div>
+						</div></div></div></div>
+
+
+</div>
+<h2 style="font-family:roman;color:green" align="center" class="card">Doctor appointments</h2>
+<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="datatable table table-hover table-center mb-0">
+											<thead>
+												<tr>
+													<th>Doctor Name</th>
+													<th>Speciality</th>
+													<th>Patient Name</th>
+													<th>Apointment Time</th>
+													<th>Status</th>
+													<th class="text-right">Amount</th>
+												</tr>
+											</thead>
+											<tbody>
+                                            {% for i in appointment %}
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{i.doctor.user.doctor_set.all.0.image.url}}" alt="User Image"></a>
+															<a href="profile.html">Dr. {{i.doctor.user.first_name}} {{i.doctor.user.last_name}}</a>
+														</h2>
+													</td>
+													<td>Dental</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{i.patient.user.patient_set.all.0.image.url}}" alt="User Image"></a>
+															<a href="profile.html"> {{i.patient.user.first_name}}</a>
+														</h2>
+													</td>
+													<td>{{i.a_date}} <span class="text-primary d-block">{{i.from_time}} to {{i.to_time}}</span></td>
+													<td> <span class="text-primary d-block">{{i.status}}</span></td>
+													<td class="text-right">
+														{{i.doctor.user.doctor_set.all.0.price}}
+													</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+{% endif %}
+					</div>
+				</div>
+{% endblock %}

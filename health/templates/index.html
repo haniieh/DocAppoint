@@ -1,0 +1,252 @@
+{% extends 'user_navigation.html' %}
+{% load static %}
+{% block body %}
+
+{% if doc %}
+<section class="section section-specialities">
+				<div class="container-fluid">
+					<div class="section-header text-center">
+						<h2 style="color:green;font-family:roman">Searched Doctors</h2><hr>
+<div class="row">
+
+		{% for i in doc %}
+	<div class="col-md-3" style="border:solid 1px lightgray;border-radius:8px">
+
+								<div class="profile-widget">
+									<div class="doc-img">
+										<a href="#">
+											{% if i.image %}
+											<img class="img-fluid" alt="User Image" src="{{i.image.url}}" style="width:200px;">
+											{% endif %}
+										</a>
+									</div>
+									<div class="pro-content">
+										<h3 class="title">
+											<a href="doctor-profile.html">Dr.{{i.user.first_name}} {{i.user.last_name}}</a>
+											<i class="fas fa-check-circle verified"></i>
+										</h3>
+										<p class="speciality">{{i.specialist}}</p>
+
+										<ul class="available-info">
+											<li>
+												<i class="fas fa-phone"></i> {{i.mobile_no}}
+											</li>
+											<li>
+												<i class="fas fa-map-marker-alt"></i> {{i.addr}} ,{{i.cl_address}}
+											</li>
+											<li>
+												<i class="fas fa-map-marker-alt"></i> {{i.clinic}}
+											</li>
+											<li>
+												<i class="far fa-clock"></i> Available on {{i.daystiming}},<br> {{i.timing}}
+											</li>
+											<li>
+												<i class="far fa-money-bill-alt"></i> {{i.price}} (Per hour charges)
+												<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+											</li>
+										</ul>
+										<div class="row row-sm">
+											<div class="col-6">
+												<a href="{% url 'login' %}" class="btn view-btn">View Profile</a>
+											</div>
+											<div class="col-6">
+												<a href="{% url 'login' %}" class="btn book-btn">Book Now</a>
+											</div>
+										</div>
+									</div>
+								</div></div>
+								{% endfor %}
+
+		</div>
+
+					</div>
+				</div>
+</section>
+{% else %}
+			<section class="section section-search">
+				<div class="container-fluid">
+					<div class="banner-wrapper">
+						<div class="banner-header text-center">
+							<h1>Online appointments with Canadian doctors</h1>
+							<p>Prescriptions, referrals, requisitions, mental health, and more.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section section-specialities">
+				<div class="container-fluid">
+					<div class="section-header text-center">
+						<h2>Clinic and Specialities</h2>
+						<p class="sub-title">Prescriptions, referrals, requisitions, mental health, and more</p>
+						<h4>Skip the waiting room! Book a virtual clinic appointment instead.</h4>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-9">
+							<div class="specialities-slider slider">
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										<img src="{% static 'user/img/specialities/specialities-01.png' %}" class="img-fluid" alt="Speciality">
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>
+									<p>Urology</p>
+								</div>	
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										<img src="{% static 'user/img/specialities/specialities-02.png' %}" class="img-fluid" alt="Speciality">
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>
+									<p>Neurology</p>	
+								</div>							
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										<img src="{% static 'user/img/specialities/specialities-03.png' %}" class="img-fluid" alt="Speciality">
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>	
+									<p>Orthopedic</p>	
+								</div>							
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										<img src="{% static 'user/img/specialities/specialities-04.png' %}" class="img-fluid" alt="Speciality">
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>	
+									<p>Cardiologist</p>	
+								</div>							
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										<img src="{% static 'user/img/specialities/specialities-05.png' %}" class="img-fluid" alt="Speciality">
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>	
+									<p>Dentist</p>
+								</div>											
+							</div>
+							
+						</div>
+					</div>
+				</div>   
+			</section>	 
+
+			<section class="section section-doctor">
+				<div class="container-fluid">
+				   <div class="row">
+						<div class="col-lg-4">
+							<div class="section-header ">
+								<h2>Book Our Doctor</h2>
+								<p>Lorem Ipsum is simply dummy text </p>
+							</div>
+							<div class="about-content">
+							<p> DocAppoint is an online health information resource for patients and their families and friends.</p>
+							<p> It is a service of the National Library of Medicine (NLM), the world's largest medical library, which is part of the National Institutes of Health (NIH).</p>
+							</div>
+						</div>
+
+						<div class="col-lg-8">
+							<div class="doctor-slider slider">
+							{% for i in data %}
+								<div class="profile-widget">
+									<div class="doc-img">
+										<a href="doctor-profile.html">
+											{% if i.image %}
+											<img class="img-fluid" alt="User Image" src="{{i.image.url}}" style="width:200px;height:150px">
+											{% endif %}
+										</a>
+										<a href="javascript:void(0)" class="fav-btn">
+											<i class="far fa-bookmark"></i>
+										</a>
+									</div>
+									<div class="pro-content">
+										<h3 class="title">
+											<a href="doctor-profile.html">Dr.{{i.user.first_name}} {{i.user.last_name}}</a>
+											<i class="fas fa-check-circle verified"></i>
+										</h3>
+										<p class="speciality">{{i.specialist}}</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<span class="d-inline-block average-rating">(17)</span>
+										</div>
+										<ul class="available-info">
+											<li>
+												<i class="fas fa-phone"></i> {{i.mobile_no}}
+											</li>
+											<li>
+												<i class="fas fa-map-marker-alt"></i> {{i.addr}} ,{{i.cl_addr}}
+											</li>
+											<li>
+												<i class="fas fa-map-marker-alt"></i> {{i.clinic}}
+											</li>
+											<li>
+												<i class="far fa-clock"></i> Available on {{i.daystiming}}, {{i.timing}}
+											</li>
+											<li>
+												<i class="far fa-money-bill-alt"></i> {{i.price}} (Per hour charges)
+												<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+											</li>
+										</ul>
+										<div class="row row-sm">
+											<div class="col-6">
+												<a href="{% url 'login' %}" class="btn view-btn">View Profile</a>
+											</div>
+											<div class="col-6">
+												<a href="{% url 'login' %}" class="btn book-btn">Book Now</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+
+							</div>
+						</div>
+				   </div>
+				</div>
+			</section>
+
+		   <section class="section section-features">
+				<div class="container-fluid">
+				   <div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="section-header">	
+								<h2 class="mt-2">Availabe Features in Our Clinic</h2>
+								<p>Medical Services, Specialized Care, Medical Equipmen, Qualified Medical Staff</p>
+								<p>Online Appointments, Insurance Information, Telemedicine Services, Patient Education</p>
+							</div>	
+							<div class="features-slider slider">
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-01.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Patient Ward</p>
+								</div>
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-02.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Test Room</p>
+								</div>
+
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-03.jpg' %}" class="img-fluid" alt="Feature">
+									<p>ICU</p>
+								</div>
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-04.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Laboratory</p>
+								</div>
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-05.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Operation</p>
+								</div>
+
+								<div class="feature-item text-center">
+									<img src="{% static 'user/img/features/feature-06.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Medical</p>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+				   </div>
+				</div>
+			</section>				
+		{% endif %}
+
+{% endblock %}

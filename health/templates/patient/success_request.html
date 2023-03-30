@@ -1,0 +1,27 @@
+{% extends 'patient/sidebar.html' %}
+{% load static %}
+{% block b %}		
+{% for i in messages %}
+<p style="color:red">{{i}}</p>
+{% endfor %}
+
+			<div class="content success-page-cont">
+				<div class="container-fluid">
+
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<div class="card success-card">
+								<div class="card-body">
+									<div class="success-cont">
+										<i class="fas fa-check"></i>
+										<h3>Thank You! {{request.user.first_name}} {{request.user.last_name}}</h3>
+										<p>Your request sent Successfully ,wait for your profile verification.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+{% endblock %}

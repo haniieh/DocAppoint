@@ -1,0 +1,5 @@
+env/
+health/migrations/
+HealthCard/__pycache__/
+health/.DS_Store
+.DS_Store

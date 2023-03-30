@@ -1,0 +1,68 @@
+{% extends 'dr/sidebar.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block b %}
+
+
+<div class="content">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card">
+								{% for i in messages %}
+<p style="color:red">{{i}}</p>
+{% endfor %}
+
+								<div class="card-body">
+									<div class="booking-doc-info">
+										<a href="doctor-profile.html" class="booking-doc-img">
+											{% if data.patient.image  %}
+											<img src="{{data.patient.image.url}}" alt="User Image">
+											{% endif %}
+										</a>
+										<div class="booking-info">
+											<h4><a href="doctor-profile.html"> {{data.patient.user.first_name}}</a></h4>
+											<div class="rating">
+												<i class="fas fa-star filled"></i>
+												<i class="fas fa-star filled"></i>
+												<i class="fas fa-star filled"></i>
+												<i class="fas fa-star filled"></i>
+												<i class="fas fa-star"></i>
+												<span class="d-inline-block average-rating">35</span>
+											</div>
+											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{data.patient.addr}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card booking-schedule schedule-widget">
+								<div class="schedule-header">
+									<div class="row">
+										<div class="col-md-12">
+
+											<form action="" method="post">
+{% csrf_token %}
+												<div class="form-group">
+													<div class="form-group">
+														<h2>Patient appoitment choice</h2>
+
+														<input type="date" class="form-control" id="datepicker" name="a_date" value="{{data.a_date|date:'Y-m-d'}}"/>
+														<input type="time" class="form-control" name="from_time" value="{{ data.from_time|time:'H:i:s' }}"/>
+														<input type="time" class="form-control" name="to_time" value="{{ data.to_time|time:'H:i:s' }}"/>	
+													</div>
+                                                	<button type="submit"  class="btn btn-primary submit-btn">Accept</button>
+												</div>
+
+</form>
+										</div>
+									</div>
+								</div>
+                            </div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		{% endblock %}
