@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t DocApppoint:latest .'
+                sh 'docker build -t doc-apppoint:latest .'
             }
         }
     }
