@@ -13,7 +13,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t doc-apppoint:latest .'
+                sh 'docker build -t docappcr.azurecr.io/docapp:latest.'
+                sh'docker push docappcr.azurecr.io/docapp:latest'
             }
         }
     }
