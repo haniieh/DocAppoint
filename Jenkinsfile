@@ -1,18 +1,20 @@
 pipeline {
     agent any
-
     stages {
-        stage('Install Dependencies') {
+        stage('Clone repository') {
             steps {
-                sh 'pip install -r requirements.txt'
+                git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git'
             }
         }
-
-        stage('Run Server') {
+        stage('Pull changes') {
             steps {
-                sh 'python manage.py runserver'
+                git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git', changelog: true, poll: true
+            }
+        }
+        stage('Build') {
+            steps {
+                sh './build.sh'
             }
         }
     }
 }
-
