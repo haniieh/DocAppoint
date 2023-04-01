@@ -25,7 +25,7 @@ SECRET_KEY = '15+*#$w2pk&6wq4+!re(ouoh+@-z1acsneupn_6ngplo6m9#5r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'HealthCard.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': "dr",
-        # 'USER': "postgres",
-        # 'PASSWORD': "postgres",
-        # 'HOST': "localhost",
-        # 'PORT': "5432",
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "dr",
+        'USER': "docappoint_admin@docappoint-psql",
+        'PASSWORD': "Humber@12345",
+        'HOST': "docappoint-psql.postgres.database.azure.com",
+        'PORT': "5432",
     }
 }
 
