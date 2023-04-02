@@ -36,6 +36,8 @@ pipeline {
            steps {
                sh "helm upgrade --install --set doc-appoint.image.tag=${env.BUILD_NUMBER} --wait --namespace default --atomic $HELM_RELEASE_NAME $HELM_CHART_PATH"
                }
+        }
+    }
     post {
         always {
             // Delete the Docker image
