@@ -1,5 +1,10 @@
 pipeline {
     agent any
+       environment {
+       HELM_RELEASE_NAME = "apps-1"
+       HELM_CHART_PATH = "/home/azureuser/helm-application/apps"
+   }
+
     stages {
         stage('Clone repository') {
             steps {
@@ -27,7 +32,10 @@ pipeline {
                 sh "docker push docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}"
             }
         }
-    }
+        stage('Deploy application using Helm') {
+           steps {
+               sh "helm upgrade --install --set doc-appoint.image.tag=${env.BUILD_NUMBER} --wait --namespace default --atomic $HELM_RELEASE_NAME $HELM_CHART_PATH'
+               }
     post {
         always {
             // Delete the Docker image
