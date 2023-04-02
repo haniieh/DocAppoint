@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Deploy application using Helm') {
            steps {
-               sh "helm upgrade --install --set doc-appoint.image.tag=${env.BUILD_NUMBER} --wait --namespace default --atomic $HELM_RELEASE_NAME $HELM_CHART_PATH'
+               sh "helm upgrade --install --set doc-appoint.image.tag=${env.BUILD_NUMBER} --wait --namespace default --atomic $HELM_RELEASE_NAME $HELM_CHART_PATH"
                }
     post {
         always {
