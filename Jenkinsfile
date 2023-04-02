@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Push Image to ACR') {
             steps {
-              
+                sh"az acr login --name docappcr --output json"
                 sh "docker push docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}"
             }
         }
