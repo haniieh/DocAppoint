@@ -13,14 +13,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t docappcr.azurecr.io/docapp:${env.BUILD_NUMBER} .'
+                sh "docker build -t docappcr.azurecr.io/docapp:${env.BUILD_NUMBER} ."
 
             }
         }
         stage('Push Image to ACR') {
             steps {
               
-                sh 'docker push docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}'
+                sh "docker push docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}"
             }
         }
     }
