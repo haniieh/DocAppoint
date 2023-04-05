@@ -12,12 +12,7 @@ pipeline {
                 git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git'
             }
         }
-        stage('Pull changes') {
-            steps {
-                //Pulling the changes from git
-                git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git', changelog: true, poll: true
-            }
-        }
+
         stage('Build') {
             steps {
                 // Building the docker image
