@@ -4,9 +4,16 @@ pipeline {
        HELM_RELEASE_NAME = "apps-1"
        HELM_CHART_PATH = "/home/azureuser/helm-application/apps"
    }
+    
 
     stages {
-        stage('Clone repository') {
+          stage('Clear Workspace') {
+            steps {
+                //Clean workspace before build
+                cleanWs()
+            }
+        }
+        stage('Clone Application repository') {
             steps {
                 //Git clone repository
                 git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git'
