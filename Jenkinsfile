@@ -3,6 +3,9 @@ pipeline {
        environment {
        HELM_RELEASE_NAME = "apps-1"
        HELM_CHART_PATH = "/home/azureuser/helm-application/apps"
+       GIT_REPO ="git@github.com:haniieh/DocAppoint.git"
+       CONTAINER_REGISTERY="docappcr"
+       APPLICATION_NAME="docapp"
    }
     
 
@@ -16,22 +19,22 @@ pipeline {
         stage('Clone Application repository') {
             steps {
                 //Git clone repository
-                git branch: 'main', url: 'git@github.com:haniieh/DocAppoint.git'
+                git branch: 'main', url: "$GIT_REPO"
             }
         }
 
         stage('Build') {
             steps {
                 // Building the docker image
-                sh "docker build -t docappcr.azurecr.io/docapp:${env.BUILD_NUMBER} ."
+                sh "docker build -t $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER} ."
 
             }
         }
         stage('Push Image to ACR') {
             steps {
                 // Login to ACR and Pushing the docker image with build number tag
-                sh"az acr login --name docappcr --output json"
-                sh "docker push docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}"
+                sh"az acr login --name $CONTAINER_REGISTERY --output json"
+                sh "docker push $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER}"
             }
         }
         stage('Deploy application using Helm') {
@@ -43,7 +46,7 @@ pipeline {
     post {
         always {
             // Delete the Docker image
-            sh "docker rmi docappcr.azurecr.io/docapp:${env.BUILD_NUMBER}"
+            sh "docker rmi $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER}"
             //to cleean the workspace
             deleteDir()
 
