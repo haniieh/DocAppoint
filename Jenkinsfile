@@ -26,7 +26,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Building the docker image
-                sh "docker build -t $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER} ."
+                sh "docker build -t ${CONTAINER_REGISTERY}.azurecr.io/${APPLICATION_NAME}:${env.BUILD_NUMBER} ."
 
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 // Login to ACR and Pushing the docker image with build number tag
                 sh"az acr login --name $CONTAINER_REGISTERY --output json"
-                sh "docker push $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER}"
+                sh "docker push ${CONTAINER_REGISTERY}.azurecr.io/${APPLICATION_NAME}:${env.BUILD_NUMBER}"
             }
         }
         stage('Deploy application using Helm') {
@@ -46,7 +46,7 @@ pipeline {
     post {
         always {
             // Delete the Docker image
-            sh "docker rmi $CONTAINER_REGISTERY.azurecr.io/$APPLICATION_NAME:${env.BUILD_NUMBER}"
+            sh "docker rmi ${CONTAINER_REGISTERY}.azurecr.io/${APPLICATION_NAME}:${env.BUILD_NUMBER}"
             //to cleean the workspace
             deleteDir()
 
