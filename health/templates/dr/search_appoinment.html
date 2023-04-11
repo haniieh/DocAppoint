@@ -50,7 +50,7 @@
                         </div>
                             <div class="col-5">
                                 <p>
-                                    Doctor Detail
+                                    Patient Detail
                                 </p>
                             </div>
 
@@ -76,12 +76,12 @@
                 <div class="appointment-list">
                     <div class="profile-info-widget">
                         <a href="patient-profile.html" class="booking-doc-img">
-                            {% if i.patient.iamge %}
+                            {% if i.patient.image %}
                             <img src="{{i.patient.image.url}}" alt="User Image">
                             {% endif %}
                         </a>
                         <div class="profile-det-info">
-                            <h3><a href="patient-profile.html">Dr {{i.patient.user.first_name}}</a></h3>
+                            <h3><a href="patient-profile.html">{{i.patient.user.first_name}}</a></h3>
                             <div class="patient-details">
                                 <h5><i class="far fa-clock"></i>{{i.a_date}}, {{i.from_time}} to {{to_time}}</h5>
                                 <h5><i class="fas fa-map-marker-alt"></i> {{i.patient.addr}}</h5>

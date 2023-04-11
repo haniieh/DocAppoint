@@ -143,7 +143,7 @@
 																	<th>ID</th>
 																	<th>Date </th>
 																	<th>Description</th>
-																	<th>File</th>
+																	<!-- <th>File</th> -->
 																	<th></th>
 																</tr>
 															</thead>
@@ -153,7 +153,7 @@
 																	<td>{{forloop.counter}}</td>
 																	<td>{{i.medical_record_set.all.0.date}}</td>
 																	<td>{{i.medical_record_set.all.0.disc}}</td>
-																	<td>{{i.medical_record_set.all.0.file}}</td>
+																	<!-- <td>{{i.medical_record_set.all.0.file}}</td> -->
 																	<td class="text-right">
 																		<div class="table-action">
 																			<a href="{% url 'patient_invoices' i.id 'med' %}" class="btn btn-sm bg-info-light">

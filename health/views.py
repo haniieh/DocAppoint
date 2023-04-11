@@ -11,6 +11,10 @@ from django.db.models import Avg,Sum,Count,Min,Max
 from random import randint
 from datetime import timedelta
 from datetime import date
+from django.db.models import Sum, F, FloatField
+from django.db.models.functions import Cast
+
+
 
 # Create your views here.
 def access(user):
@@ -852,7 +856,10 @@ def doctor_invoices(request,pid):
         return redirect('dr_profile')
     appointment = Appointment.objects.get(id=pid)
     med = Doctors_Invoice.objects.filter(appointment=appointment)
-    total = str(med.aggregate(Sum('price')).values)
+    # total = str(med.aggregate(Sum('price')).values)
+    total = med.aggregate(total_price=Sum(Cast('price', FloatField()))).get('total_price')
+
+
     return render(
         request,
         'dr/invoices.html',
