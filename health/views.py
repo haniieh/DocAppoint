@@ -785,7 +785,7 @@ def medical_profile(request):
             return redirect("medical_profile")
     return render(
         request,
-        'Medical/profile.html',
+        'medical/profile.html',
         context={'doc':medical,'form':medical_form}
         )
 
